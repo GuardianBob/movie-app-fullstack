@@ -12,6 +12,10 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IndexPage'
+  name: 'IndexPage',
+  setup() {
+    const $q = useQuasar();
+    $q.dark.set(true);
+  }
 })
 </script>

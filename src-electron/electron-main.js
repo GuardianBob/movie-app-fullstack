@@ -1,7 +1,8 @@
 import { app, BrowserWindow, nativeTheme } from 'electron'
 import path from 'path'
 import os from 'os'
-import api from '../db/server'
+import '../db/server' // Somehow this is what initializes the backend???!
+// import api from '../db/server' 
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()

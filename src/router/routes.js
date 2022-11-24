@@ -2,10 +2,13 @@
 const routes = [
   {
     path: '/',
-    // component: () => import('layouts/MainLayout.vue'),
-    component: () => import('layouts/MovieLayout.vue'),
+    component: () => import('layouts/MainLayout.vue'),
+    // component: () => import('layouts/MovieLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: '', component: () => import('pages/HomePage.vue') },
+      { path: '/movies', component: () => import('src/pages/Movies.vue') },
+      { path: '/tv', component: () => import('src/pages/TV.vue') },
+      { path: '/shuffle', component: () => import('src/pages/Random.vue') },
     ]
   },
 
