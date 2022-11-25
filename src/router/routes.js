@@ -8,7 +8,10 @@ const routes = [
       { path: '', component: () => import('pages/HomePage.vue') },
       { path: '/movies', component: () => import('src/pages/Movies.vue') },
       { path: '/tv', component: () => import('src/pages/TV.vue') },
+      { path: '/movie_db', component: () => import('src/pages/MoviesDB.vue') },
+      { path: '/tv_DB', component: () => import('src/pages/TVDB.vue') },
       { path: '/shuffle', component: () => import('src/pages/Random.vue') },
+      { path: '/movie_list', component: () => import('src/pages/MovieList.vue') },
     ]
   },
 

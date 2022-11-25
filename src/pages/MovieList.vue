@@ -1,35 +1,15 @@
 <template>
-  <div id="app" class="row justify-center">
-    <div class="container ">
-      <div class="text-center">
-        <h2 class="text-center mt-5">Trending Movies 🍿</h2>
-        <p>Keep up with the hottest movies that are trending this week.</p>
-      </div>
-
-      <div class="my-4">
-        <a href="#" @click="getTrendingMovies('day')" class="mx-3 h4">
-          Trending today</a>
-      </div>
-      <div class="my-4">
-        <a href="#" @click="getTrendingMovies('week')" class="mx-3 h4">This week</a>
-      </div>
-      <div class="my-4">
-        <input v-model="title" />
-        <a href="#" @click="test_movie()" class="mx-3 h4">Test Add</a>
-      </div>
-      <div class="my-4">
-        <a href="#" @click="test_connect()" class="mx-3 h4">Test Connect</a>
-      </div>
-      <div class="my-4">
-        <a href="#" @click="list_all()" class="mx-3 h4">List All</a>
-      </div>
-      <div class="row justify-center" v-if="movies.length > 0">
-        <div class="col-md-3 text-center" v-for="(movie, i) in movies" :key="i">
-          <movie-card :movie="movie" />
+  <q-page>
+    <div id="app" class="row justify-center text-center">
+      <div class="col-12 text-center">
+        <div class="row">
+          <div class="col-4" v-for="(movie, i) in movies" :key="i">
+            <movie-card :movie="movie" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -44,7 +24,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      movies: [],
+      movies: ref([]),
       apiKey: process.env.TMDB_API,
       title: ref(""),
     };

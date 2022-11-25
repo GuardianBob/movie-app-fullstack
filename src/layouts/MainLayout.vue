@@ -80,7 +80,12 @@ const linksList = [
     icon: 'queue_play_next',
     link: 'tv_db'
   },
-  
+  {
+    title: 'Movie List',
+    // caption: 'chat.quasar.dev',
+    icon: 'mdi-movie-open-plus',
+    link: 'movie_list'
+  },
 ]
 
 export default defineComponent({

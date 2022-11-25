@@ -2,7 +2,7 @@
   <q-page>
     <div id="app" class="row justify-center text-center">
       <div class="col-12 text-center">
-        <h2 class="text-center mt-5">Trending Movies 🍿</h2>
+        <h2 class="text-center mt-5">{{ page_name }}</h2>
         <p>Keep up with the hottest movies that are trending this week.</p>
       </div>
     </div>
@@ -35,8 +35,8 @@
         </q-card>
       </div>
     </div>
-    <div class="row justify-center">
-      <div class="col-4 text-center" v-for="(movie, i) in movies" :key="i">
+    <div class="row">
+      <div class="col-md-3" v-for="(movie, i) in movies" :key="i">
         <movie-card :movie="movie" />
       </div>
     </div>
@@ -58,6 +58,7 @@ export default defineComponent({
     const $q = useQuasar();
     $q.dark.set(true);
     return {
+      page_name: "TV",
       movies: [],
       apiKey: process.env.TMDB_API,
       title: ref(""),

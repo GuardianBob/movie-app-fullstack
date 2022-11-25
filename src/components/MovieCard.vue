@@ -1,7 +1,7 @@
 <template>
   <q-item>
     <div class="card mb-4 shadow-lg border border-secondary bg-dark text-light">
-      <img class="card-img-top" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Card image cap" />
+      <img class="card-img-top btn-cstm-w-full" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Card image cap" />
       <div class="card-body">
         <p class="card-text">{{ movie.title }}</p>
         <div class="">
