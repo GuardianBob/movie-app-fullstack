@@ -25,7 +25,8 @@ class RunService {
 
     // const params = await this.get_movie_params(body)
 
-    let results = await axios.get(url, {params})
+    let results = await axios.get(url, { params })
+    console.log(results)
     return (results.data.results)
   }
 
@@ -61,8 +62,8 @@ class RunService {
       new_params["with_genres"] = genres.toString()
     }
 
-    if (params.start_year) new_params["primary_release_date.gte"] = params.start_year
-    if (params.end_year) new_params["release_date.lte"] = params.end_year
+    if (params.start_year) new_params["primary_release_date.gte"] = params.start_year + "-01-01"
+    if (params.end_year) new_params["primary_release_date.lte"] = params.end_year + "-12-31"
     if (params.rating) new_params["vote_average.gte"] = params.rating
     if (params.country) new_params["with_original_language"] = option_list.country[params.country]
     if (params.sort_by) new_params["sort_by"] = option_list.sortBy[params.sort_by]   
@@ -84,8 +85,8 @@ class RunService {
       new_params["with_genres"] = genres.toString()
     }
 
-    if (params.start_year) new_params["first_air_date.gte"] = params.start_year
-    if (params.end_year) new_params["first_air_date.lte"] = params.end_year
+    if (params.start_year) new_params["first_air_date.gte"] = params.start_year + "-01-01"
+    if (params.end_year) new_params["first_air_date.lte"] = params.end_year + "-12-31"
     if (params.rating) new_params["vote_average.gte"] = params.rating
     if (params.country) new_params["with_original_language"] = option_list.country[params.country]
     if (params.sort_by) new_params["sort_by"] = option_list.sortBy[params.sort_by]   

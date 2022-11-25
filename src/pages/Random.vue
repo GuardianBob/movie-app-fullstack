@@ -92,6 +92,7 @@ export default defineComponent({
       })
     },  
     async get_random() {
+      this.save_state();
       // this.getTrendingMovies("day");
       // let options = await this.convert_options()
       if (this.year_end < this.year_start) {
