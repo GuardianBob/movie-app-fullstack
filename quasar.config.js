@@ -103,7 +103,7 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
       plugins: ["Notify"],
-      config: {},
+      config: { },
 
       // iconSet: 'material-icons', // Quasar icon set
       iconSet: "mdi-v6",
@@ -117,7 +117,6 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
     },
 
     // animations: 'all', // --- includes all animations
