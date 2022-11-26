@@ -40,7 +40,7 @@
 import { defineComponent, ref } from 'vue'
 import MovieCard from 'components/MovieCard.vue';
 import APIService from '../../services/api'
-import RunService from '../../services/runService'
+import TMDBService from '../../services/tmdbService'
 import { useQuasar, Notify } from "quasar";
 import mOptions from "../assets/options"
 export default defineComponent({
@@ -113,7 +113,7 @@ export default defineComponent({
         "genres": this.genres,
       }
       console.log("genres: ", selections["genres"].toString())
-      let movies = await RunService.fetch_random(selections)
+      let movies = await TMDBService.fetch_random(selections)
       console.log(movies)
       this.movies = movies
     },

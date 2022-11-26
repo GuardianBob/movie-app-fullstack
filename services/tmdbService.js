@@ -4,6 +4,7 @@ import axios from 'axios';
 import option_list from "../src/assets/options";
 
 class RunService {
+
   async fetch_random(body) {
     console.log('Hit RunService: ', body)
     let url = ""
@@ -24,10 +25,13 @@ class RunService {
     }
 
     // const params = await this.get_movie_params(body)
-
+    
     let results = await axios.get(url, { params })
     console.log(results)
-    return (results.data.results)
+    let random_list = await this.random_list(body.type, results, url, params)
+    console.log("Random_List :", random_list)
+    // return (results.data.results)
+    return random_list
   }
 
   // WORKS!!
@@ -65,6 +69,7 @@ class RunService {
     if (params.start_year) new_params["primary_release_date.gte"] = params.start_year + "-01-01"
     if (params.end_year) new_params["primary_release_date.lte"] = params.end_year + "-12-31"
     if (params.rating) new_params["vote_average.gte"] = params.rating
+    new_params["vote_count.gte"] = 10
     if (params.country) new_params["with_original_language"] = option_list.country[params.country]
     if (params.sort_by) new_params["sort_by"] = option_list.sortBy[params.sort_by]   
 
@@ -88,13 +93,74 @@ class RunService {
     if (params.start_year) new_params["first_air_date.gte"] = params.start_year + "-01-01"
     if (params.end_year) new_params["first_air_date.lte"] = params.end_year + "-12-31"
     if (params.rating) new_params["vote_average.gte"] = params.rating
+    new_params["vote_count.gte"] = 10
     if (params.country) new_params["with_original_language"] = option_list.country[params.country]
     if (params.sort_by) new_params["sort_by"] = option_list.sortBy[params.sort_by]   
 
     return new_params
   }
 
-  
+  async random_list(media_type = "Movie", results, url, params) {
+    let new_url
+    let id_param
+    switch (media_type) {
+      case "Movie":
+        new_url = 'https://api.themoviedb.org/3/movie/'
+        id_param = 'movie_id'
+        break;
+      case "Series":
+        new_url = 'https://api.themoviedb.org/3/tv/'
+        id_param = 'tv_id'
+        break;
+      default:
+        new_url = 'https://api.themoviedb.org/3/movie/'
+        id_param = 'movie_id'
+        break;
+    }
+    let random_list = []
+    let api_key = process.env.TMDB_API
+    let item_list = []
+    let i = 0
+    let k = 20
+    k < results.data.total_results ? null : k = results.data.total_results
+    console.log(k, item_list.length)
+    while (i < k) {
+      let rand_number = Math.floor(Math.random() * results.data.total_results) + 1;
+      if (!item_list.includes(rand_number.toString())) {
+        i++
+        item_list.push(rand_number.toString())
+        let page = Math.floor(rand_number / 20)
+        page == 0 ? page = 1: null
+        let page_item = rand_number % 20
+        console.log(`page: ${page}, item : ${page_item}`)
+        params["page"] = page
+        // console.log("params:", params)
+        // console.log("get individual: ", axios.get(url + rand_number + `?api_key=${api_key}`))
+        // console.log("get individual: ", axios.get(url + rand_number, { params }))
+        let rand_results = await axios.get(url, { params })
+        console.log(`result : `, rand_results)
+        random_list.push(rand_results.data.results[page_item])
+      }
+    }
+    
+    // item_list.forEach(async (rand_number) => {
+    //   let page = Math.floor(rand_number / 20)
+    //   page == 0 ? page = 1: null
+    //   let page_item = rand_number % 20
+    //   console.log(`page: ${page}, item : ${page_item}`)
+    //   params["page"] = page
+    //   // console.log("params:", params)
+    //   // console.log("get individual: ", axios.get(url + rand_number + `?api_key=${api_key}`))
+    //   // console.log("get individual: ", axios.get(url + rand_number, { params }))
+    //   let rand_results = await axios.get(url, { params })
+    //   console.log(`result : `, rand_results)
+    //   random_list.push(rand_results.data.results[page_item])
+    // })
+    return random_list
+      // } else {
+      //   k += 1
+    console.log(item_list)
+  }
 }
 
 export default new RunService();
